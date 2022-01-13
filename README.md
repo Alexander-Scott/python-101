@@ -1,6 +1,12 @@
-# python-101
+# Running the unit tests
 
-hello world
-print("Hello world")
-test 12www
+```bash
+python3 -m unittest discover is_week_day
+```
 
+# Running python coverage
+
+```bash
+coverage run -m unittest discover is_week_day
+coverage report -m
+```

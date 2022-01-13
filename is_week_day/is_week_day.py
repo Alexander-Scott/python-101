@@ -6,11 +6,15 @@ class IsWeekDay:
         today = date.weekday()
         days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         print(days[today])
-        if today == 6 or today == 5:
+        if today in[6, 5]:
             return False
         return True
 
+    # @staticmethod
+    # def my_method(val_1, val_2):
+    #     return val_1 + val_2
 
-if __name__ == "__main__":
+
+def main_execution():
     today = datetime.datetime.now()
-    IsWeekDay.check_if_today_is_a_weekday(today)
+    return IsWeekDay.check_if_today_is_a_weekday(today)
