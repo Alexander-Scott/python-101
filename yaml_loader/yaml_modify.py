@@ -3,7 +3,7 @@ import os
 
 class YamlModify:
     @staticmethod
-    def yaml_modify(loader_file: list):
+    def yaml_modify(loader_file: list, job_name: str):
         # list = [
         #     {"job": {"name": "my-job", "parent": "my-parent", "vars": {"data": "hello world"}}},
         #     {"job": {"name": "my-job_2", "parent": "my-job", "vars": {"data": "hello world"}}},
@@ -13,7 +13,7 @@ class YamlModify:
             for key in job["job"]:
                 print("what vaue for  " + key)
                 if key == "name":
-                    job["job"][key] = "testestring"
+                    job["job"][key] = job_name
                 if isinstance(job["job"][key], dict):
                     for nested_key in job["job"][key]:
                         print("what vaue for  " + nested_key)
