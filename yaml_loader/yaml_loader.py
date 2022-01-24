@@ -5,4 +5,4 @@ class YamlLoader:
     def read_file(file_path) -> dict:
         with open(file_path,"r") as file:
             file_content = file.read()
-            return file_content
+            return yaml.load(file_content, Loader=yaml.FullLoader)
