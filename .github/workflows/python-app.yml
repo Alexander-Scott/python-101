@@ -25,5 +25,8 @@ jobs:
         pip3 install coverage
         coverage run -m unittest discover is_week_day
         coverage report -m
-
+    - name: Run pylint
+      run: |
+        pip3 install pylint
+        find . -type f -name "*.py" | xargs pylint
 
