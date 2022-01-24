@@ -12,10 +12,12 @@ class YamlModify:
         for job in loader_file:
             for key in job["job"]:
                 print("what vaue for  " + key)
-                job["job"][key] = 
+                if key == "name":
+                    job["job"][key] = "testestring"
                 if isinstance(job["job"][key], dict):
                     for nested_key in job["job"][key]:
                         print("what vaue for  " + nested_key)
+        return loader_file
 
 
 # job["job"] = {"name": "my-job", "parent": "my-parent", "vars": {"data": "hello world"}}
