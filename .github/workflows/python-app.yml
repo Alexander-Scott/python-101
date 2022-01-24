@@ -20,3 +20,8 @@ jobs:
       run: |
         python3 --version
         echo $(pwd)
+    - name: Run coverage on is_week_day
+      run: |
+        coverage run -m unittest discover is_week_day
+
+
