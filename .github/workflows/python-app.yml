@@ -17,6 +17,6 @@ jobs:
       with:
         python-version: "3.10"
     - name: Run our command
-      shell: |
+      run: |
         echo "Hello world"
 
