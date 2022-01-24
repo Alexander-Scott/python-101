@@ -24,5 +24,6 @@ jobs:
       run: |
         pip3 install coverage
         coverage run -m unittest discover is_week_day
+        coverage report -m
 
 
