@@ -1,5 +1,5 @@
 - job:
-    name: testestring
+    name: andre_job
     parent: my-parent
     vars:
       data: hello world
