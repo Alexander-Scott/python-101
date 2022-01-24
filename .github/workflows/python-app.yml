@@ -29,4 +29,7 @@ jobs:
       run: |
         pip3 install pylint
         find . -type f -name "*.py" | xargs pylint
-
+      continue-on-error: true
+    - name: echo something
+      run: |
+        echo "Hello World"
