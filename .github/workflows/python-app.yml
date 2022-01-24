@@ -33,3 +33,6 @@ jobs:
     - name: echo something
       run: |
         echo "Hello World"
+    - name: install MOO
+      run: |
+        apt-get moo
