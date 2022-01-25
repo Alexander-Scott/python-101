@@ -1,0 +1,5 @@
+- job:
+    name: new_job_name
+    parent: my-parent
+    vars:
+      data: hello world
