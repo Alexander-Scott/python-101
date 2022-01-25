@@ -16,20 +16,24 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: "3.10"
+        
     - name: Run our command
       run: |
         python3 --version
         echo $(pwd)
-    - name: Run coverage on is_week_day
+    - name: Install dependencies
       run: |
         pip3 install coverage
+        pip3 install pylint
+    - name: Run coverage on is_week_day
+      run: |
         coverage run -m unittest discover is_week_day
         coverage report -m
     - name: Run pylint
       run: |
-        pip3 install pylint
         find . -type f -name "*.py" | xargs pylint
       continue-on-error: true
-    - name: echo something
+    - name: Run coverage on yaml_loader_module
       run: |
-        echo "Hello World"
+        coverage run --source yaml_loader_module/ -m unittest discover yaml_loader_module
+        coverage report -m
