@@ -8,15 +8,14 @@ on:
     branches: '*'
 
 jobs:
-  build:
+  build_coverage:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
-        python-version: "3.10"
-        
+        python-version: "3.10"   
     - name: Run our command
       run: |
         python3 --version
@@ -24,17 +23,29 @@ jobs:
     - name: Install dependencies
       run: |
         pip3 install coverage
-        pip3 install pylint
         pip3 install pyyaml
     - name: Run coverage on is_week_day
       run: |
         coverage run -m unittest discover is_week_day
         coverage report -m
-    - name: Run pylint
-      run: |
-        find . -type f -name "*.py" | xargs pylint
-      continue-on-error: true
     - name: Run coverage on yaml_loader_module
       run: |
         coverage run --source yaml_loader_module/ -m unittest discover yaml_loader_module
         coverage report -m
+
+  build_pylint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        pip3 install pylint  
+    - name: Run pylint
+      run: |
+        find . -type f -name "*.py" | xargs pylint
+      continue-on-error: true
+
