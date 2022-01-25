@@ -3,3 +3,4 @@
     parent: my-parent
     vars:
       data: hello world
+      
