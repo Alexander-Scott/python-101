@@ -32,6 +32,10 @@ jobs:
       run: |
         coverage run --source yaml_loader_module/ -m unittest discover yaml_loader_module
         coverage report -m
+    - name: Run coverage on github_pr_fetcher
+      run: |
+        coverage run --source github_pr_fetcher/ -m unittest discover github_pr_fetcher
+        coverage report -m    
 
   build_pylint:
     runs-on: ubuntu-latest
