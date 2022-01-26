@@ -1,5 +1,12 @@
 import requests
 
+# Acceptance Criteria
+# - [ ] Support configuring the PRs fetched via command line arguments, e.g. fetch only opened or only closed PRs
+# - [ ] Support fetching an individual PR via a PR number.
+# - [ ] Only ping Github once per script call.
+# - [ ] Test should not interact with the real Github API, but rather used mocked data.
+# - [ ] Obtain 100% test coverage
+
 # import json
 
 
@@ -11,7 +18,7 @@ class HttpGitHubFetchPRGit:
     pr_query_url = "https://api.github.com/repos/bagaco-ramp-up/python-101/pulls"
 
     @staticmethod
-    def get_github_pr_title():
+    def get_github_all_pr():
         # pr_query_url = "https://api.github.com/repos/bagaco-ramp-up/python-101/pulls"
         pr_params = {
             "state": "all",
@@ -26,10 +33,10 @@ class HttpGitHubFetchPRGit:
             pull_request_title = pull_request_dic[i]["title"]
             pull_request_state = pull_request_dic[i]["state"]
             pull_request_number = pull_request_dic[i]["number"]
-            print(pull_request_number, " " + pull_request_title + " " + pull_request_state)
-        return pull_request_title
+            # print(pull_request_number, " " + pull_request_title + " " + pull_request_state)
+        return pull_request_dic
 
-
+   
 # /repos/{owner}/{repo}/pulls/{pull_number}
 #  /repos/{owner}/{repo}/pulls
 # https://api.github.com
