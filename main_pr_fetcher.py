@@ -10,4 +10,4 @@ if __name__ == "__main__":
     prs_dict = HttpGitHubFetchPRGit.get_github_all_pr()        
     
     PrHandler.get_github_pr_from_prs_data(prs_dict, args.pr_number)
-    PrHandler.get_pr_author(prs_dict, args.pr_number)
+    

@@ -1,9 +1,11 @@
 import requests
+import json
 
 # Acceptance Criteria
 # - [x] Support fetching an individual PR via a PR number.
-# - [ ] Additionally print the author of a PR.
-# - [ ] Only ping Github once per script call.
+# - [x] Only ping Github once per script.
+# - [x] Additionally print the author of a PR.
+# - [x] Only iterate over the fetched PRs JSON once per script.
 # - [ ] Test should not interact with the real Github API, but rather used mocked data.
 # - [ ] Obtain 100% test coverage
 
@@ -29,6 +31,8 @@ class HttpGitHubFetchPRGit:
         # print(pull_request_data)
         pull_request_dic = pull_request_data.json()
         # print(json.dumps(pull_request_dic, indent=4, sort_keys=True))
+        # with open("github_pr_fetcher/pr_mock_data.json", "w") as new_file:
+        #     json.dump(pull_request_dic, new_file)  # convert in to a string
         for i in range(0, len(pull_request_dic)):
             pull_request_title = pull_request_dic[i]["title"]
             pull_request_state = pull_request_dic[i]["state"]
@@ -36,7 +40,7 @@ class HttpGitHubFetchPRGit:
             # print(pull_request_number, " " + pull_request_title + " " + pull_request_state)
         return pull_request_dic
 
-   
+
 # /repos/{owner}/{repo}/pulls/{pull_number}
 #  /repos/{owner}/{repo}/pulls
 # https://api.github.com
