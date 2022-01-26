@@ -48,8 +48,26 @@ class TestPRFetcher(unittest.TestCase):
         prs_dict = HttpGitHubFetchPRGit.get_github_all_pr()
         pr_search_result = PrHandler.get_github_pr_from_prs_data(prs_dict, pr_number)
         # Assert
-        self.assertEquals(pr_search_result["title"], expeted_title)
-        self.assertEquals(pr_search_result["user"]["login"], expeted_author)
+        self.assertEqual(pr_search_result["title"], expeted_title)
+        self.assertEqual(pr_search_result["user"]["login"], expeted_author)
+
+    @patch("requests.get", MagicMock(return_value=MockResponse(200, "github_pr_fetcher/pr_mock_data.json")))
+    def test__given_regular_data_fetched_from_github__when_pr_doesnt_exist__expect_null_return(
+        self,
+    ):
+        # pr number: 11
+        # "title": "git fetch pull requests",
+        # "login": "Luissprof",
+        # Arrange
+        pr_number = -1
+        # Act
+        prs_dict = HttpGitHubFetchPRGit.get_github_all_pr()
+        pr_search_result = PrHandler.get_github_pr_from_prs_data(prs_dict, pr_number)
+        # Assert
+        self.assertIsNone(pr_search_result)
+        
+
+
 
     # @patch("requests.get", MagicMock(return_value=MockResponse(200, "github_pr_fetcher/corruped_file.json")))
     # def test__given_empty_data__expect_exception_raised(self):
