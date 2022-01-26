@@ -1,8 +1,8 @@
 import requests
 
 # Acceptance Criteria
-# - [ ] Support configuring the PRs fetched via command line arguments, e.g. fetch only opened or only closed PRs
-# - [ ] Support fetching an individual PR via a PR number.
+# - [x] Support fetching an individual PR via a PR number.
+# - [ ] Additionally print the author of a PR.
 # - [ ] Only ping Github once per script call.
 # - [ ] Test should not interact with the real Github API, but rather used mocked data.
 # - [ ] Obtain 100% test coverage
