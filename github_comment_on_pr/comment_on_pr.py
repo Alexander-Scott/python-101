@@ -24,11 +24,28 @@ class GraphQlGitHub:
         print("PR  author is " + pr_login +" and id is " + pr_id +" \n")
         print(response.json())
         print("\n")
+        mutation = GraphQlGitHub.generate_mutation_to_add_a_comment_to_a_pr()
+        mutation_response = requests.post(GraphQlGitHub.pr_query_url, json=mutation, headers=headers)
+        response_dic=mutation_response.json()
+        print(response_dic)
 
 
     @staticmethod
     def generate_mutation_to_add_a_comment_to_a_pr():
-
+        return {
+            "query": """
+                mutation AddCommentToPR {
+                    addComment (
+                        input: {
+                            body: "Hello World 2"
+                            subjectId: "PR_kwDOGqj_7c4xkZmN"
+                        }
+                    ) {
+                        clientMutationId
+                    }
+                }
+            """
+        }
 
 
     #  Fetch PR author and id
