@@ -1,6 +1,4 @@
-import argparse
-import requests, json
-
+import requests
 
 
 class GraphQlGitHub:
@@ -10,17 +8,16 @@ class GraphQlGitHub:
     @staticmethod
     def github_comment_posted_pr(args):
         """
-        This function intends to fetch the PR data fom github
+        This function intends to comment actual PR
         """
-        print("test")
 
         query = GraphQlGitHub.generate_query_to_fetch_PR_author_and_id(args.pr_number)
         headers = {"Authorization": "Bearer " + args.token}
         response = requests.post(GraphQlGitHub.pr_query_url, json=query, headers=headers)
-        response_dic = response.json()
+        response_dict = response.json()
 
-        pr_id = response_dic["data"]["organization"]["repository"]["pullRequest"]["id"]
-        pr_login = response_dic["data"]["organization"]["repository"]["pullRequest"]["author"]["login"]
+        pr_id = response_dict["data"]["organization"]["repository"]["pullRequest"]["id"]
+        pr_login = response_dict["data"]["organization"]["repository"]["pullRequest"]["author"]["login"]
 
         print("PR  author is " + pr_login + " and id is " + pr_id + " \n")
         print(response.json())
@@ -28,8 +25,8 @@ class GraphQlGitHub:
 
         mutation = GraphQlGitHub.generate_mutation_to_add_a_comment_to_a_pr(pr_id, args.comment, pr_login)
         mutation_response = requests.post(GraphQlGitHub.pr_query_url, json=mutation, headers=headers)
-        response_dic = mutation_response.json()
-        return response_dic
+        response_dict = mutation_response.json()
+        return response_dict
 
     @staticmethod
     def generate_mutation_to_add_a_comment_to_a_pr(pr_id, comment, pr_login):
@@ -49,7 +46,6 @@ class GraphQlGitHub:
         variables = {"pr_id": pr_id, "body": body}
         return {"query": query, "variables": variables}
 
-    #  Fetch PR author and id
     @staticmethod
     def generate_query_to_fetch_PR_author_and_id(pr_number):
         query = """
@@ -68,6 +64,3 @@ class GraphQlGitHub:
             """
         variables = {"pr_number": pr_number}
         return {"query": query, "variables": variables}
-
-
-

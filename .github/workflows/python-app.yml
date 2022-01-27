@@ -39,7 +39,11 @@ jobs:
     - name: Run coverage on github_pr_fetcher
       run: |
         coverage run --source github_pr_fetcher/ -m unittest discover github_pr_fetcher
-        coverage report -m    
+        coverage report -m   
+    - name: Run coverage on github_comment
+      run: |
+        coverage run  -m --source github_comment_on_pr/ -m unittest discover github_comment_on_pr
+        coverage report -m     
 
   build_pylint:
     runs-on: ubuntu-latest
