@@ -1,5 +1,5 @@
 import argparse
-import requests
+import requests, json
 
 
 
@@ -8,7 +8,7 @@ class GraphQlGitHub:
     pr_query_url = "https://api.github.com/graphql"
 
     @staticmethod
-    def github_comment_posted_pr():
+    def github_comment_posted_pr(args):
         """
         This function intends to fetch the PR data fom github
         """
@@ -29,7 +29,7 @@ class GraphQlGitHub:
         mutation = GraphQlGitHub.generate_mutation_to_add_a_comment_to_a_pr(pr_id, args.comment, pr_login)
         mutation_response = requests.post(GraphQlGitHub.pr_query_url, json=mutation, headers=headers)
         response_dic = mutation_response.json()
-        print(response_dic)
+        return response_dic
 
     @staticmethod
     def generate_mutation_to_add_a_comment_to_a_pr(pr_id, comment, pr_login):
@@ -70,20 +70,4 @@ class GraphQlGitHub:
         return {"query": query, "variables": variables}
 
 
-# pullRequest(number: 10)
 
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description="write github comment on pr with number")
-    parser.add_argument("pr_number", type=int, help="Provide pr number where to add comment on")
-    parser.add_argument("comment", type=str, help="Comment to be made in the PR")
-    parser.add_argument("token", type=str, help="Token to access github")
-    
-    args = parser.parse_args()
-
-    GraphQlGitHub.github_comment_posted_pr()
-
-# - [x] Create a python script that opens a comment on a PR in Github.
-# - [x] The content of the comment should be "Hello " + pr_author
-# - [x] Github can only be communicated with via GraphQL (and not REST).
-# - [ ] A job is created that runs our python script. The job runs on all opened PRs.
