@@ -1,7 +1,6 @@
 import argparse
 import requests
 
-from my_token import Token
 
 
 class GraphQlGitHub:
@@ -16,7 +15,7 @@ class GraphQlGitHub:
         print("test")
 
         query = GraphQlGitHub.generate_query_to_fetch_PR_author_and_id(args.pr_number)
-        headers = {"Authorization": "Bearer " + Token.Token}
+        headers = {"Authorization": "Bearer " + args.token}
         response = requests.post(GraphQlGitHub.pr_query_url, json=query, headers=headers)
         response_dic = response.json()
 
@@ -61,7 +60,7 @@ class GraphQlGitHub:
                                 author {
                                     login
                                 }
-                            id
+                                id
                             }
                         }
                     }
@@ -78,11 +77,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="write github comment on pr with number")
     parser.add_argument("pr_number", type=int, help="Provide pr number where to add comment on")
     parser.add_argument("comment", type=str, help="Comment to be made in the PR")
+    parser.add_argument("token", type=str, help="Token to access github")
+    
     args = parser.parse_args()
 
     GraphQlGitHub.github_comment_posted_pr()
 
 # - [x] Create a python script that opens a comment on a PR in Github.
-# - [ ] The content of the comment should be "Hello " + pr_author
-# - [ ] Github can only be communicated with via GraphQL (and not REST).
+# - [x] The content of the comment should be "Hello " + pr_author
+# - [x] Github can only be communicated with via GraphQL (and not REST).
 # - [ ] A job is created that runs our python script. The job runs on all opened PRs.
