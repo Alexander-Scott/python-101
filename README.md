@@ -7,8 +7,8 @@ python3 -m unittest discover is_week_day
 # Running python coverage
 
 ```bash
-coverage run --source yaml_loader_module/ -m unittest discover yaml_loader_module
-coverage report -m
+coverage run --source github_comment_on_pr/ -m unittest discover github_comment_on_pr && coverage report -m
+
 ```
 
 # Goals for 25/01/2022
