@@ -1,5 +1,5 @@
 import argparse
-from github_comment_on_pr.comment_on_pr import GraphQlGitHub
+from comment_on_pr import GraphQlGitHub
 
 if __name__ == "__main__":
 
