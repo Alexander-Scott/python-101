@@ -15,4 +15,4 @@ jobs:
         echo $TOKEN | docker login ghcr.io -u USERNAME --password-stdin
         docker push ghcr.io/bagaco-ramp-up/python-101/docker_fun:latest
       env:
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TOKEN: ${{ secrets.DOCKER_PUSH }}
