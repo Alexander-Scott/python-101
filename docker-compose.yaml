@@ -1,0 +1,15 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  docker_fun:
+    image: ghcr.io/bagaco-ramp-up/python-101/docker_fun:latest
+    command: 
+      - docker_compose_testing.txt
+      - "Testing docker-compose"
+      - $TOKEN
+  docker_comment_on_pr:
+    image: ghcr.io/bagaco-ramp-up/python-101/comment_on_pr:latest
+    command:
+      - "22"
+      - "docker-comp+ose run test"
+      - $TOKEN
+
